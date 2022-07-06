@@ -1,11 +1,23 @@
 import React from 'react'
 
-export const Searchbar = () => {
+const Searchbar = ({handleSubmit, handleChange, searchString}) => {
+
   return (
-    <div className='search-bar'>Searchbar
-        <input>
+    <div className='search-bar'>
+      <form onSubmit={handleSubmit} className="form-horizontal">
+        <input
+        placeholder='Search Exercises...'
+        type="text"
+        name="searchString"
+        required
+        onChange={handleChange}
+        value={searchString}
+        />
+        <button type="submit">Search</button>
+      </form>
         
-        </input>
     </div>
   )
 }
+
+export default Searchbar
