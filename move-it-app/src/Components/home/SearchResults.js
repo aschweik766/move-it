@@ -1,19 +1,17 @@
 import React from 'react'
+import { useParams } from 'react-router-dom'
 
 const SearchResults = ({ exercises }) => {
 
-  if (!exercises.length) {
-    return <h3> No exercises found. </h3>
-  }
+  let { id } = useParams()
+  const ex = exercises[id]
+  console.log(id)
 
   return (
-    <div className='gallery'>SearchResults
-      {exercises.map(ex => (
-        <div key={ex.id} className='ex-card'>
-          <h2>{ex.name}</h2>
-        </div>
-      )) }
-  
+    <div className='card'>
+        <h1>{ex.name}</h1>
+        <h3>{ex.id}</h3>
+        <h3>{ex.url}</h3>
     </div>
   )
 }
