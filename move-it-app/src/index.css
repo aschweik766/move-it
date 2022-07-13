@@ -85,13 +85,13 @@ body {
     margin-left: 1rem;
   }
 
-  .gallery {
+  .gallery .filter-search, .filter-btn{
     column-count: 2;
   }
 }
 
 @media (min-width: 1000px) {
-  .gallery {
+  .gallery .filter-search, .filter-btn{
     column-count: 3;
   }
   header {
@@ -101,7 +101,7 @@ body {
 }
 
 @media (min-width: 1400px) {
-  .gallery {
+  .gallery , .filter-search, .filter-btn{
     column-count: 4;
   }
 }

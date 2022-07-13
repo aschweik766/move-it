@@ -3,15 +3,41 @@ import  { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 // import Home from "./Pages/Home";
-// import SearchResults from "./Components/home/SearchResults";
-import FilterSearch from './Components/home/FilterSearch';
+import SearchResults from "./Components/home/SearchResults";
 import ExercisesDisplay from './Pages/ExercisesDisplay';
-// import axios from 'axios';
-// import LastSearched from './Components/home/LastSearched';
 
 function App() {
 
-  // const [lastSearch, setLastSearch] = useState('');
+ 
+  return (
+
+    <div className='container-fluid moveit-app'>
+      <Header/>
+      {/* <Searchbar query={query} setQuery={setQuery}/> */}
+			<div className='row d-flex align-items-center mt-4 mb-4'>
+          <Routes> 
+            <Route path="/exercises/" element={<ExercisesDisplay />}/> 
+            <Route path="/exercises/:id" element={<SearchResults  />}/> 
+            {/* <Route path="/search/" element={<SearchByNameList  />}/>  */}
+            
+          </Routes>
+          {/* <div className='row'></div> */}
+            {/* <div className='col'><FilterSearch /></div> */}
+            {/* <div className='col'><LastSearched lastSearch={lastSearch}/> </div> */}
+        </div>
+    
+    </div>
+
+  );
+}
+
+export default App;
+
+
+//sandbox
+
+
+ // const [lastSearch, setLastSearch] = useState('');
 
   // const [query, setQuery] = useState(" ");
   // const [exercises, setExercises] = useState([]);
@@ -77,30 +103,6 @@ function App() {
   // }
   
 
-  return (
-
-    <div className='container-fluid moveit-app'>
-      <Header/>
-  
-			<div className='row d-flex align-items-center mt-4 mb-4'>
-          <Routes> 
-            <Route path="/exercises" element={<ExercisesDisplay />}/> 
-            {/* <Route path="/exercises/:id" element={<SearchResults exercises={exercises} exerName={exerName} getExerByName={getExerByName} searchString={searchString}  />}/>  */}
-            {/* <Route path="/exercises/name" element={<SearchResults exercises={exercises} exerName={exerName} getExerByName={getExerByName} searchString={searchString}  />}/>  */}
-            
-            
-          </Routes>
-          <div className='row'></div>
-            <div className='col'><FilterSearch /></div>
-            {/* <div className='col'><LastSearched lastSearch={lastSearch}/> </div> */}
-        </div>
-    
-    </div>
-
-  );
-}
-
-export default App;
 /* // lastSearch={lastSearch}
 // setLastSearch(searchString);
 // setSearchString('')

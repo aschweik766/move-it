@@ -1,22 +1,24 @@
-import React from 'react'
+// import { useEffect } from "react";
+// import axios from 'axios';
+// import SearchByNameList from "../../Pages/SearchByNameList";
 
-const Searchbar = (props) => {
+// const Searchbar = ({ query, setQuery, }) => {
+// 	return (
+// 		<div className='col col-sm-4 gallery'>
+// 			<input
+// 			type="text"
+// 			value={props.term}
+// 			className="search form-control"
+// 			placeholder="Search..."
+// 			onChange={getSearchTerm}
+// 			/>
+// 		{/* {<SearchByNameList exercises={exercises} setQuery={setQuery} setExercises={setExercises} query={query} />} */}
+// 		</div>
+// 	);
+// };
 
-  return (
-		<div className='col col-sm-4 gallery'>
-			<input
-				className='form-control search'
-				value={props.value}
-				onChange={(event) => props.setQuery(event.target.value.toLocaleLowerCase())}
-				placeholder='Type to search...'
-			></input>
-		</div>
-	);
-};
 
-  
-
-export default Searchbar
+// export default Searchbar
 
 // return (
 //   <div className='col col-sm-4'>

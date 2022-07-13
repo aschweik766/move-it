@@ -32,11 +32,11 @@ const ExercisesDisplay = () => {
             setSearchResults(newExerciseList);
             console.log(searchResults)
 
-            // const renderSearchResults = newExerciseList.map(exercise => {
-            //     return Object.values(exercise)
-            // })
-            //     setSearchResults(renderSearchResults)
-            //     console.log(renderSearchResults)
+            const renderSearchResults = newExerciseList.map(exercise => {
+                return Object.values(exercise)
+            })
+                setSearchResults(renderSearchResults)
+                console.log(renderSearchResults)
         } else {
             setSearchResults(exercises);
         }
@@ -51,12 +51,15 @@ const ExercisesDisplay = () => {
 
     
       useEffect(() => {
+         
+            
         getEx(exercises);
         // renderResults(searchResults)
       }, [exercises])
 
+// console.log(exercises)
     const displayAllExer = () => {
-            return searchResults.map((ex) => (
+            return exercises.map((ex) => (
                 <div key={ex._id} className='gallery card' style={{width: "18rem"}}>
                     <Link to={`/exercises/${ex._id}`}>
                         <div>
