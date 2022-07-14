@@ -3,133 +3,67 @@ import  { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 // import Home from "./Pages/Home";
-import SearchResults from "./Components/home/SearchResults";
+import SearchResults from "./Pages/SearchResults";
 import ExercisesDisplay from './Pages/ExercisesDisplay';
+import SearchByNameList from "./Pages/SearchByNameList";
+import FilterSearch from "./Components/home/FilterSearch";
 
 function App() {
+
+  const [exercises, setExercises] = useState([])
+  const [query, setQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+    
+      const getEx = () => {
+        const url= `http://localhost:3001/exercises/`
+        fetch(url)
+        .then(res => res.json())
+        .then(res => {
+          setExercises(res)
+        //   console.log(res)
+        })
+        .catch(console.error)
+      }
+
+      const searchHandler = (query) => {
+        // console.log(query)
+        // console.log(exercises)
+        setQuery(query);
+        if (query !== ""){
+            const newExerciseList = exercises.filter((exercise) => {
+                return exercise.name.includes(query)
+            })
+            setSearchResults(newExerciseList);
+            // console.log(searchResults)
+        } else {
+            setSearchResults(exercises);
+        }
+      };
+    
+      useEffect(() => {
+        getEx(exercises);
+       
+      }, [exercises])
+
 
  
   return (
 
     <div className='container-fluid moveit-app'>
-      <Header/>
-      {/* <Searchbar query={query} setQuery={setQuery}/> */}
-			<div className='row d-flex align-items-center mt-4 mb-4'>
+      <Header/> 
+      <div className="search-bar">
+        <SearchByNameList exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}/>
+      </div>
           <Routes> 
-            <Route path="/exercises/" element={<ExercisesDisplay />}/> 
-            <Route path="/exercises/:id" element={<SearchResults  />}/> 
-            {/* <Route path="/search/" element={<SearchByNameList  />}/>  */}
-            
+            <Route path="/exercises/" element={<ExercisesDisplay query={query} exercises={exercises} searchResults={searchResults} term={query} searchKeyword={searchHandler}/>}/> 
+            <Route path="/exercises/:id" element={<SearchResults searchResults={searchResults} exercises={exercises}/>}/> 
           </Routes>
-          {/* <div className='row'></div> */}
-            {/* <div className='col'><FilterSearch /></div> */}
+            {/* <div className="row"></div>
+            <div className="row"></div>
+            <br></br>
+            <div className='row'><FilterSearch /></div> */}
             {/* <div className='col'><LastSearched lastSearch={lastSearch}/> </div> */}
-        </div>
-    
     </div>
-
   );
 }
-
 export default App;
-
-
-//sandbox
-
-
- // const [lastSearch, setLastSearch] = useState('');
-
-  // const [query, setQuery] = useState(" ");
-  // const [exercises, setExercises] = useState([]);
-
-  // const url = `http://localhost:3001/exercises`
-  
-  // useEffect(() => {
-  //   getExercises(searchValue)
-  // }, [searchValue])
-
-//  const fetchExercises = async () => {
-//     const res = await axios.get(`http://localhost:3001/search?q=${query}`);
-//     setExercises(res.exercises);
-//   };
-
-// useEffect(() => {
-//   // getExercises()
-//   fetchExercises()
-//   // if (query.length === 0 || query.length > 2) fetchExercises();
-// }, [query]);
-
-
-//   const getExercises =  (searchString) => {
-//     const url = `http://localhost:3001/exercises`
-//     // const url = `http://localhost:3001/exercises/?s=${searchString}`
-//      fetch(url)
-//      .then(response => response.json())
-//      .then(response => setExercises(response))
-//      .catch(err => console.error(err));
-//  }
-//   const getExercises = async (searchString) => {
-//     try {
-//       const response = await axios.get('http://localhost:3000/exercises-name', {
-//           params: {name: 'clamshells'}
-//       })
-//       setExercises(response.data)
-//     } catch (error) {
-//         console.log(error)
-//     }
-//  }
-
-//  const getExercises = async (searchValue) => {
-//     const url = `http://localhost:3001/exercises/?s=${searchValue}`
-//     const response = await fetch(url);
-// 		const responseJson = await response.json();
-
-// 		if (responseJson.Search) {
-// 			setExercises(responseJson.Search);
-// 		}
-// 	};
-
-
-  // console.log(exercises)
-  // console.log(exercises)
-
-  // const handleChange = (event) => {
-  //   setSearchString(event.target.value);
-  // }
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   getExercises(searchString);
-  // }
-  
-
-/* // lastSearch={lastSearch}
-// setLastSearch(searchString);
-// setSearchString('')
-<div className="App">
-      <Header /> 
-      <Routes>
-        <Route path="/homepage" 
-        element={<Home exercises={exercises} searchString={searchString} setSearchString={setSearchString}  handleChange={handleChange}
-        handleSubmit={handleSubmit} getExercises={getExercises}/>}/>
-        {/* <Route path='/:id' element={<SearchResults exercises={exercises}/>}/> */
-        /* <Route path='/exercises' element={<SearchResults exercises={exercises}/>}/>
-      </Routes>
-    </div> */
-    
-    // if(!exercises) {
-    //   return(
-    //     <>
-    //       <h3>Loading Results</h3>
-    //     </>
-    //   )
-    // }
-
-    // const responseJson = await res.json();
-
-    // if (responseJson.Search) {
-    //   setExercises(responseJson.Search)
-    // }
-
-    // const url = `http://localhost:3001/exercises/?s=${searchString}`
-    // <Searchbar searchValue={setSearchValue} setSearchValue={setSearchValue} handleChange={handleChange} handleSubmit={handleSubmit} />

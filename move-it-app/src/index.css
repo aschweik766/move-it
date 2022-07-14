@@ -24,7 +24,7 @@ header,
   color: black;
 }
 body {
-  font-family: sans-serif;
+  font-family: 'Edu VIC WA NT Beginner', cursive;
   line-height: 1.5;
   margin: 0;
   padding: 0 .5rem;
@@ -78,14 +78,31 @@ body {
   
 }
 
+.gallery > .row {
+ overflow-x: visible;
+ flex-wrap: nowrap;
+}
 
+.flex-container {
+  background-color: #f1f1f1;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+
+/* 
 @media (min-width: 600px) {
   button + button,
   input + button {
     margin-left: 1rem;
   }
+  .gallery {
 
-  .gallery .filter-search, .filter-btn{
+  }
+
+  .filter-search, .filter-btn{
     column-count: 2;
   }
 }
@@ -104,4 +121,4 @@ body {
   .gallery , .filter-search, .filter-btn{
     column-count: 4;
   }
-}
+}  */
