@@ -1,18 +1,33 @@
 import Header from "./Components/Header";
-import  { Routes, Route } from 'react-router-dom';
+import  { Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
-// import Home from "./Pages/Home";
+import axios from "axios";
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import SignUp from "./Pages/SignUp";
 import SearchResults from "./Pages/SearchResults";
 import ExercisesDisplay from './Pages/ExercisesDisplay';
 import SearchByNameList from "./Pages/SearchByNameList";
 import FilterSearch from "./Components/home/FilterSearch";
 
-function App() {
 
-  const [exercises, setExercises] = useState([])
+
+function App() {
+  const [user, setUser] = useState(null);
+  const [exercises, setExercises] = useState([]);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+
+      const getUser = async () => {
+        try {
+          const url = `${process.env.REACT_APP_API_URL}/auth/login-success`;
+          const { data } = await axios.get(url, { withCredentials: true });
+          setUser(data.user._json);
+        } catch (err) {
+          console.log(err);
+        }
+      };
     
       const getEx = () => {
         const url= `http://localhost:3001/exercises/`
@@ -41,6 +56,7 @@ function App() {
       };
     
       useEffect(() => {
+        getUser();
         getEx(exercises);
        
       }, [exercises])
@@ -55,6 +71,9 @@ function App() {
         <SearchByNameList exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}/>
       </div>
           <Routes> 
+            <Route path="/" element={user ? <Home user={user} /> : <Navigate to="/login" />}/>
+            <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}/>
+            <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp />}/>
             <Route path="/exercises/" element={<ExercisesDisplay query={query} exercises={exercises} searchResults={searchResults} term={query} searchKeyword={searchHandler}/>}/> 
             <Route path="/exercises/:id" element={<SearchResults searchResults={searchResults} exercises={exercises}/>}/> 
           </Routes>

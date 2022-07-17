@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 
 const SearchResults = (props) => {
 
-  console.log(props)
+  // console.log(props)
   let { id } = useParams()
   const ex = props.searchResults[id]
-  console.log(id)
+  // console.log(id)
 
   return (
     <div className='card' style={{width: "500px", height: "650px"}}>
