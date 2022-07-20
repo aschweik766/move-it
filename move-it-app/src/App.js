@@ -1,36 +1,38 @@
 import Header from "./Components/Header";
-import  { Routes, Route, Navigate } from 'react-router-dom';
+import  { Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Home from "./Pages/Home";
-import Login from "./Pages/Login";
-import SignUp from "./Pages/SignUp";
+import SignIn from "./authenticate/SignIn/index"
+import SignUp from "./authenticate/SignUp/index"
 import SearchResults from "./Pages/SearchResults";
 import ExercisesDisplay from './Pages/ExercisesDisplay';
 import SearchByNameList from "./Pages/SearchByNameList";
 import FilterSearch from "./Components/home/FilterSearch";
 
 
+axios.defaults.baseURL = "/api";
+//react to print npm module install//
 
 function App() {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-      const getUser = async () => {
-        try {
-          const url = `${process.env.REACT_APP_API_URL}/auth/login-success`;
-          const { data } = await axios.get(url, { withCredentials: true });
-          setUser(data.user._json);
-        } catch (err) {
-          console.log(err);
-        }
-      };
+      // const getUser = async () => {
+      //   try {
+      //     const url = `${process.env.REACT_APP_API_URL}/auth/login/success`;
+      //     const { data } = await axios.get(url, { withCredentials: true })
+      //     setUser(data.user._json);
+      //   } catch (err) {
+      //     // console.log(err);
+      //   }
+      // };
     
       const getEx = () => {
-        const url= `http://localhost:3001/exercises/`
+        const url= `http://localhost:3001/ex/exercises/`
         fetch(url)
         .then(res => res.json())
         .then(res => {
@@ -56,7 +58,7 @@ function App() {
       };
     
       useEffect(() => {
-        getUser();
+        // getUser();
         getEx(exercises);
        
       }, [exercises])
@@ -71,9 +73,9 @@ function App() {
         <SearchByNameList exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}/>
       </div>
           <Routes> 
-            <Route path="/" element={user ? <Home user={user} /> : <Navigate to="/login" />}/>
-            <Route path="/login" element={user ? <Navigate to="/" /> : <Login />}/>
-            <Route path="/signup" element={user ? <Navigate to="/" /> : <SignUp />}/>
+            <Route path="/home" element={<Home/>}/>
+            <Route path="/signin" element={<SignIn/>}/>
+            <Route path="/signup" element={<SignUp/>}/>
             <Route path="/exercises/" element={<ExercisesDisplay query={query} exercises={exercises} searchResults={searchResults} term={query} searchKeyword={searchHandler}/>}/> 
             <Route path="/exercises/:id" element={<SearchResults searchResults={searchResults} exercises={exercises}/>}/> 
           </Routes>
