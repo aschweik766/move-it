@@ -10,6 +10,7 @@ import SearchResults from "./Pages/SearchResults";
 import ExercisesDisplay from './Pages/ExercisesDisplay';
 import SearchByNameList from "./Pages/SearchByNameList";
 import FilterSearch from "./Components/home/FilterSearch";
+import Heart from './Components/Heart';
 
 
 axios.defaults.baseURL = "/api";
@@ -77,7 +78,7 @@ function App() {
             <Route path="/signin" element={<SignIn/>}/>
             <Route path="/signup" element={<SignUp/>}/>
             <Route path="/exercises/" element={<ExercisesDisplay query={query} exercises={exercises} searchResults={searchResults} term={query} searchKeyword={searchHandler}/>}/> 
-            <Route path="/exercises/:id" element={<SearchResults searchResults={searchResults} exercises={exercises}/>}/> 
+            <Route path="/exercises/:id" element={<SearchResults searchResults={searchResults} exercises={exercises} favComponent={Favorites}/>}/> 
           </Routes>
             {/* <div className="row"></div>
             <div className="row"></div>
@@ -88,3 +89,8 @@ function App() {
   );
 }
 export default App;
+
+
+//parent vs child --
+  // --useContext [database token cookies]
+  // --best 

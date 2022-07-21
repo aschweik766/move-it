@@ -80,7 +80,8 @@ body {
 
 .gallery > .row {
  overflow-x: visible;
- flex-wrap: nowrap;
+ flex-wrap: wrap;
+ justify-content: space-evenly;
 }
 
 .flex-container {

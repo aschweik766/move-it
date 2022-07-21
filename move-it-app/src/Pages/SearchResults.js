@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
+
 const SearchResults = (props) => {
 
   // console.log(props)
@@ -9,6 +10,8 @@ const SearchResults = (props) => {
   // console.log(id)
 
   return (
+    <div>
+      <button onClick className='favorite-card'></button>
     <div className='card' style={{width: "500px", height: "650px"}}>
         <h1>{ex.name}</h1>
         <h3>{ex.id}</h3>
@@ -17,6 +20,7 @@ const SearchResults = (props) => {
         <h5>{ex.position}</h5>
         <h5>{ex.muscleGroup}</h5>
         <iframe class='card-img-top' src={ex.url} alt='exercise video' title='YouTube video player' frameBorder='0' height='515' width='440' allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowFullScreen></iframe>
+    </div>
     </div>
   )
 }
