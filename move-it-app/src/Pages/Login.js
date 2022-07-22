@@ -1,32 +1,34 @@
-// import { Link } from "react-router-dom";
+import Google from "../images/google.png";
 
-// const Login = () => {
-//     const googleAuth = () => {
-// 		window.open(
-// 			`${process.env.REACT_APP_API_URL}/auth/google/callback`,
-// 			"_self"
-// 		);
-// 	};
-// 	return (
-// 		<div className="container">
-// 			<h1 className="title">Welcome to Move It HEP</h1>
-// 			<div className="form-container">
-// 				<div className="left">
-// 					<img className="img" src="move-it-app/src/images/login.jpeg" alt="login icon" />
-// 				</div>
-// 				<div className="right">
-// 					<h2 className="form-heading">Members Log in with Google </h2>
-// 					<button className="google_btn" onClick={googleAuth}>
-// 						<img className="img" src="move-it-app/src/images/google.png" alt="google icon" />
-// 						<span>Sign in with Google</span>
-// 					</button>
-// 					<p className="text">
-// 						New User ? <Link to="/signup">Sign Up</Link>
-// 					</p>
-// 				</div>
-// 			</div>
-// 		</div>
-// 	);
-// }
+const Login = () => {
+  
+  const google = () => {
+    window.open("http://localhost:3001/auth/google", "_self");
+  };
 
-// export default Login
+
+  return (
+    <div className="login">
+      <h1 className="loginTitle">Choose a Login Method</h1>
+      <div className="wrapper">
+        <div className="left">
+          <div className="loginButton google" onClick={google}>
+            <img src={Google} alt="" className="icon" />
+            Google
+          </div>
+        </div>
+        <div className="center">
+          <div className="line" />
+          <div className="or">OR</div>
+        </div>
+        <div className="right">
+          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Password" />
+          <button className="submit">Login</button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

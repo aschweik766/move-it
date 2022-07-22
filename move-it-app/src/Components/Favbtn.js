@@ -1,10 +1,10 @@
 
 import React from 'react'
 
-const Heart = () => {
+const Favbtn = () => {
   return (
     <div className='favorite-btn'> 
-        <span className='mr-2'>Add to Favorites</span>
+        <span className='mr-2'>Like</span>
         <svg
             width='1em'
             height='1em'
@@ -24,6 +24,6 @@ const Heart = () => {
   )
 }
 
-export default Heart
+export default Favbtn
 
 

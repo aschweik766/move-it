@@ -1,19 +1,24 @@
-import Header from "./Components/Header";
-import  { Routes, Route } from 'react-router-dom';
+import './App.css';
+// import Header from "./Components/Header";----using just navbar instead for now
+import Navbar from "./Components/Navbar";
+import  { Routes, Route, Navigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Home from "./Pages/Home";
-import SignIn from "./authenticate/SignIn/index"
-import SignUp from "./authenticate/SignUp/index"
+import Login from "./Pages/Login";
+import Post from "./Pages/Post";
+// import SignIn from "./authenticate/SignIn/index"
+// import SignUp from "./authenticate/SignUp/index"
 import SearchResults from "./Pages/SearchResults";
 import ExercisesDisplay from './Pages/ExercisesDisplay';
 import SearchByNameList from "./Pages/SearchByNameList";
+import AddFavToLib from './Components/library/AddFavToLib';
 import FilterSearch from "./Components/home/FilterSearch";
-import Heart from './Components/Heart';
+import Favbtn from './Components/Favbtn';
 
 
-axios.defaults.baseURL = "/api";
+// axios.defaults.baseURL = "/api";
 //react to print npm module install//
 
 function App() {
@@ -21,6 +26,36 @@ function App() {
   const [exercises, setExercises] = useState([]);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [user, setUser] = useState(null);
+  // const [cardFavorites, setFavorites] = useState(null);
+  // const [reRender, setRender] = useState(0)
+
+  useEffect(() => {
+    const getUser = () => {
+      fetch("http://localhost:3001/auth/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+        },
+      })
+        .then((response) => {
+          if (response.status === 200) return response.json();
+          throw new Error("authentication has been failed!");
+        })
+        .then((resObject) => {
+          setUser(resObject.user);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getUser();
+  }, []);
+
+
 
       // const getUser = async () => {
       //   try {
@@ -69,17 +104,50 @@ function App() {
   return (
 
     <div className='container-fluid moveit-app'>
-      <Header/> 
+      {/* <UserContext.Provider value={{
+            authenticated, setAuthenticated,
+            user, setUser,
+            exercises, setExercises,
+            cardFavorites, setFavorites,
+            searchResults, setSearchResults,
+            reRender, setReRender
+        }}>
+            <AuthenticatePage />
+        </UserContext.Provider> */}
+      <Navbar user={user}/>
       <div className="search-bar">
-        <SearchByNameList exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}/>
+        <SearchByNameList 
+          exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}
+        />
       </div>
-          <Routes> 
-            <Route path="/home" element={<Home/>}/>
-            <Route path="/signin" element={<SignIn/>}/>
-            <Route path="/signup" element={<SignUp/>}/>
-            <Route path="/exercises/" element={<ExercisesDisplay query={query} exercises={exercises} searchResults={searchResults} term={query} searchKeyword={searchHandler}/>}/> 
-            <Route path="/exercises/:id" element={<SearchResults searchResults={searchResults} exercises={exercises} favComponent={Favorites}/>}/> 
-          </Routes>
+        <Routes> 
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/" /> : <Login />}
+          />
+          <Route
+            path="/post/:id"
+            element={user ? <Post /> : <Navigate to="/login" />}
+          />
+            <Route path="/home" 
+            element={<Home/>}
+          />
+            <Route path="/signin" 
+            element={<SignIn/>}
+          />
+            <Route path="/signup" 
+            element={<SignUp/>}
+          />
+            <Route path="/exercises/" 
+            element={<ExercisesDisplay 
+            query={query} exercises={exercises} searchResults={searchResults} term={query} searchKeyword={searchHandler}/>}
+          /> 
+            <Route path="/exercises/:id" 
+            element={<SearchResults 
+            searchResults={searchResults} exercises={exercises} favComponent={Favorites}/>}
+          /> 
+        </Routes>
             {/* <div className="row"></div>
             <div className="row"></div>
             <br></br>

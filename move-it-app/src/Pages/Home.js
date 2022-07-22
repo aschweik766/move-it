@@ -1,31 +1,59 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-
-axios.defaults.baseURL = "/api";
+import Card from "../components/Card"
+import {posts} from "../data"
 
 const Home = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [user, setUser] = useState();
-
-  useEffect( () => {
-    const fetchProfile = async () => {
-      const data = await axios.get("/profile");
-      setUser(data);
-      setLoading(false);
-    }
-    fetchProfile()
-    .catch(console.error)
-  }, []);
-
-  if (isLoading) return "Loading...";
-  else {
     return (
-      <div>
-        <p>Email: {user.email}</p>
-        <p>First Name: {user.first_name}</p>
-      </div>
-    );
-  }
+        <div className="home">
+           <h1>Welcome to the homepage</h1>
+           {posts.map(post=>(
+                <Card key={post.id} post={post}/>
+            ))}
+        </div>
+    )
 }
 
-export default Home;
+export default Home
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import axios from "axios";
+
+// axios.defaults.baseURL = "/api";
+
+// const Home = () => {
+//   const [isLoading, setLoading] = useState(true);
+//   const [user, setUser] = useState();
+
+//   useEffect( () => {
+//     const fetchProfile = async () => {
+//       const data = await axios.get("/profile");
+//       setUser(data);
+//       setLoading(false);
+//     }
+//     fetchProfile()
+//     .catch(console.error)
+//   }, []);
+
+//   if (isLoading) return "Loading...";
+//   else {
+//     return (
+//       <div>
+//         <p>Email: {user.email}</p>
+//         <p>First Name: {user.first_name}</p>
+//       </div>
+//     );
+//   }
+// }
+
+// export default Home;
