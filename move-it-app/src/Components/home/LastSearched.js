@@ -2,7 +2,7 @@ import React from 'react'
 
 const LastSearched = ({ lastSearch }) => {
   return (
-    <div className='card' style={{width: "18rem"}}>
+    <div className='card' style={{width: "28rem", height: '30rem'}}>
           <img src={lastSearch} class="card-img-top" alt="last searched video"/>
             <div class="card-body">
               <h5 class="card-title">Card title</h5>

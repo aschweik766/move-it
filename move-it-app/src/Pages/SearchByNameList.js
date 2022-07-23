@@ -1,5 +1,6 @@
 import { UseState, useEffect, useRef} from 'react';
 import SearchResults from './SearchResults';
+import Favbtn from '../Components/Favbtn';
 // import LastSearched from '../Components/home/LastSearched';
 
 
@@ -14,7 +15,7 @@ const SearchByNameList = (props) => {
 
     return (
         <div>
-                <h1>Search Results:</h1>
+                <h1 >Search Results:</h1>
             <div className='search-bar'>
                 <div className='col col-sm-4 gallery'>
                     <input

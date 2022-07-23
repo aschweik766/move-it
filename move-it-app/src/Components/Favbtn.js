@@ -3,11 +3,11 @@ import React from 'react'
 
 const Favbtn = () => {
   return (
-    <div className='favorite-btn'> 
-        <span className='mr-2'>Like</span>
+    <div className='favorite-btn' style={{padding: '4px'}}> 
+        <span className='mr-2'></span>
         <svg
-            width='1em'
-            height='1em'
+            width='2em'
+            height='2em'
             viewBox='0 0 16 16'
             className='bi bi-heart-fill'
             fill='red'

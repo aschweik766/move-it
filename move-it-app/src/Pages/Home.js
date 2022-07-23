@@ -1,10 +1,9 @@
-import Card from "../components/Card"
-import {posts} from "../data"
+import Card from "../Components/Card"
+import { posts } from "../Components/HomeData"
 
 const Home = () => {
     return (
         <div className="home">
-           <h1>Welcome to the homepage</h1>
            {posts.map(post=>(
                 <Card key={post.id} post={post}/>
             ))}
