@@ -1,5 +1,4 @@
-import './App.css';
-// import Header from "./Components/Header";----using just navbar instead for now
+
 import Navbar from "./Components/Navbar";
 import  { Routes, Route, Navigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,13 +7,9 @@ import axios from "axios";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Post from "./Pages/Post";
-// import SignIn from "./authenticate/SignIn/index"
-// import SignUp from "./authenticate/SignUp/index"
 import SearchResults from "./Pages/SearchResults";
 import ExercisesDisplay from './Pages/ExercisesDisplay';
 import SearchByNameList from "./Pages/SearchByNameList";
-import AddFavToLib from './Components/library/AddFavToLib';
-import FilterSearch from "./Components/home/FilterSearch";
 import Favbtn from './Components/Favbtn';
 import RemoveFavorites from './Components/RemoveFavorites';
 import DisplayLibrary from './Pages/DisplayLibrary';
@@ -24,16 +19,16 @@ import AddNewCard from './Pages/AddNewCard';
 
 
 // axios.defaults.baseURL = "/api";
-//react to print npm module install//
+
 
 function App() {
-  // const [user, setUser] = useState(null);
+
   const [exercises, setExercises] = useState([]);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [user, setUser] = useState(null);
   const [favorites, setFavorites] = useState([]);
-  // const [reRender, setRender] = useState(0)
+
 
   useEffect(() => {
     const getUser = () => {
@@ -73,8 +68,7 @@ function App() {
       }
 
       const searchHandler = (query) => {
-        // console.log(query)
-        // console.log(exercises)
+
         setQuery(query);
         if (query !== ""){
             const newExerciseList = exercises.filter((exercise) => {
@@ -88,7 +82,7 @@ function App() {
       };
     
       useEffect(() => {
-        // getUser();
+   
         getEx(exercises);
        
       }, [exercises])
@@ -122,16 +116,7 @@ function App() {
   return (
 
     <div className='container-fluid moveit-app'>
-      {/* <UserContext.Provider value={{
-            authenticated, setAuthenticated,
-            user, setUser,
-            exercises, setExercises,
-            cardFavorites, setFavorites,
-            searchResults, setSearchResults,
-            reRender, setReRender
-        }}>
-            <AuthenticatePage />
-        </UserContext.Provider> */}
+
       <Navbar user={user}/>
       <div className="search-bar">
         <SearchByNameList 
@@ -176,27 +161,20 @@ function App() {
             removeFavComponent={RemoveFavorites} />}
           /> 
            <Route path="/library/:id" 
-            element={<AddNewCard 
+            element={<SearchResults 
             searchResults={favorites} handleUnFavClick={removeExCardFav} 
             favComponent={Favbtn}  />}
           /> 
-           <Route path="/exercise/:editcard" 
+           <Route path="/exercise/editcard" 
             element={<EditExCardForm 
             searchResults={favorites} handleUnFavClick={removeExCardFav} 
             favComponent={Favbtn}  />}
           /> 
         </Routes>
-            {/* <div className="row"></div>
-            <div className="row"></div>
-            <br></br>
-            <div className='row'><FilterSearch /></div> */}
-            {/* <div className='col'><LastSearched lastSearch={lastSearch}/> </div> */}
+            
     </div>
   );
 }
 export default App;
 
 
-//parent vs child --
-  // --useContext [database token cookies]
-  // --best 
