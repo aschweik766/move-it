@@ -27,6 +27,9 @@ const DisplayLibrary = (props) => {
                         <Link className='link' to={`/library/${idx}`}>
                             <button className='cardButton' style={{maxHeight: '75px', fontSize: '22px'}}>expand</button>
                         </Link>
+                        <Link className='link' to={`/exercise/editcard/`}>
+                            <button className='cardButton' style={{maxHeight: '75px', fontSize: '22px'}}>update</button>
+                        </Link>
                         <div>
                         </div>
                         <div className='container'>

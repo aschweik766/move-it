@@ -7,7 +7,9 @@ const Navbar = ({ user }) => {
   // const { setAuthenticated, setUser } = useContext(UserContext)
 
   const logout = () => {
+
     window.open("http://localhost:3001/auth/logout", "_self");
+    // window.open("https://move-it-backend-hep.herokuapp.com/auth/logout", "_self");
     // setAuthenticated(false)
     // setUser(null)
   };
@@ -40,11 +42,11 @@ const Navbar = ({ user }) => {
             </Link>
           )}
         
-          <div className='align-right'>
+          <div className='align-right'style={{padding:'5px'}}>
           <Link to="/"><button className='cardButton nav-buttons'>Home</button></Link>
-          <Link to="/about"><button className='cardButton nav-buttons'>About</button></Link>
+          {/* <Link to="/about"><button className='cardButton nav-buttons'>About</button></Link> */}
           <Link to="/library"><button className='cardButton nav-buttons'>Library</button></Link>
-          <Link to="/account"><button className='cardButton nav-buttons'>Account</button></Link>
+          {/* <Link to="/account"><button className='cardButton nav-buttons'>Account</button></Link> */}
           <Link to="/ex/exercises/"><button className='cardButton nav-buttons'>Exercises Display</button></Link>
        </div>
        
