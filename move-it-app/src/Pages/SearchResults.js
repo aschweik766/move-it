@@ -10,10 +10,6 @@ const FavComponent = props.favComponent
 let { id } = useParams()
 const ex = props.searchResults[id]
 
-// console.log(ex)
-
-
-
   return (
     <div className="pdf_container"ref={ref}>
       <div className='card' style={{width: "500px", height: "600px"}}>

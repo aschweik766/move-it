@@ -10,6 +10,7 @@ const Post = () => {
   console.log(location);
   return (
     <div className="post">
+      <p>Coming Soon: links to latest research articles!</p>
       <img src={post.img} alt="" className="postImg" />
       <h1 className="postTitle">{post.title}</h1>
       <p className="postDesc">{post.desc}</p>

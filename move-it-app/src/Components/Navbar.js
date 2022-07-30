@@ -7,7 +7,9 @@ const Navbar = ({ user }) => {
   // const { setAuthenticated, setUser } = useContext(UserContext)
 
   const logout = () => {
+
     window.open("http://localhost:3001/auth/logout", "_self");
+    // window.open("https://move-it-backend-hep.herokuapp.com/auth/logout", "_self");
     // setAuthenticated(false)
     // setUser(null)
   };

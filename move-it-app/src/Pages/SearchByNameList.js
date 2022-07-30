@@ -27,9 +27,7 @@ const SearchByNameList = (props) => {
                     onChange={getSearchTerm}
                     />
                 </div>
-               
             </div>
-            {/* <SearchResults props={props}/> */}
         </div>
     );
 

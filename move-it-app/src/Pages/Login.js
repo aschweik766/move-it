@@ -4,6 +4,7 @@ const Login = () => {
   
   const google = () => {
     window.open("http://localhost:3001/auth/google", "_self");
+    // window.open("https://move-it-backend-hep.herokuapp.com/auth/google", "_self");
   };
 
 
@@ -21,7 +22,7 @@ const Login = () => {
           <div className="line" />
           <div className="or">OR</div>
         </div>
-        <div className="right">
+        <div className="right"> Comming Soon
           <input type="text" placeholder="Username" />
           <input type="text" placeholder="Password" />
           <button className="submit">Login</button>

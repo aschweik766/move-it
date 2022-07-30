@@ -33,6 +33,7 @@ function App() {
   useEffect(() => {
     const getUser = () => {
       fetch("http://localhost:3001/auth/login/success", {
+      // fetch("https://move-it-backend-hep.herokuapp.com/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -57,7 +58,8 @@ function App() {
 
     
       const getEx = () => {
-        const url= `http://localhost:3001/ex/exercises/`
+        // const url= `http://localhost:3001/ex/exercises/`
+        const url= `https://move-it-backend-hep.herokuapp.com/ex/exercises/`
         fetch(url)
         .then(res => res.json())
         .then(res => {
