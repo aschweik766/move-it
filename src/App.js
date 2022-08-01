@@ -3,7 +3,7 @@ import Navbar from "./Components/Navbar";
 import  { Routes, Route, Navigate} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState, useEffect } from 'react';
-import axios from "axios";
+// import axios from "axios";
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Post from "./Pages/Post";
@@ -13,9 +13,9 @@ import SearchByNameList from "./Pages/SearchByNameList";
 import Favbtn from './Components/Favbtn';
 import RemoveFavorites from './Components/RemoveFavorites';
 import DisplayLibrary from './Pages/DisplayLibrary';
-import EditCardPage from './Pages/EditCardPage';
+// import EditCardPage from './Pages/EditCardPage';
 import EditExCardForm from './Components/library/EditExCardForm';
-import AddNewCard from './Pages/AddNewCard';
+// import AddNewCard from './Pages/AddNewCard';
 
 
 // axios.defaults.baseURL = "/api";
