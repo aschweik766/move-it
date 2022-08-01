@@ -40,6 +40,7 @@ function App() {
           Accept: "application/json",
           "Content-Type": "application/json",
           "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin":  `https://moveit-frontend.herokuapp.com`,
         },
       })
         .then((response) => {
@@ -67,6 +68,7 @@ function App() {
             Accept: "application/json",
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": true,
+            "Access-Control-Allow-Origin":  `https://moveit-frontend.herokuapp.com`,
           },
         })
         .then(res => res.json())
