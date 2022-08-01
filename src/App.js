@@ -60,7 +60,15 @@ function App() {
       const getEx = () => {
         // const url= `http://localhost:3001/ex/exercises/`
         const url= `https://move-it-backend-hep.herokuapp.com/ex/exercises/`
-        fetch(url)
+        fetch(url, {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Credentials": true,
+          },
+        })
         .then(res => res.json())
         .then(res => {
           setExercises(res)
