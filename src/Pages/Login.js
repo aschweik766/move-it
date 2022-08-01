@@ -3,8 +3,8 @@ import Google from "../images/google.png";
 const Login = () => {
   
   const google = () => {
-    window.open("http://localhost:3001/auth/google", "_self");
-    // window.open("https://move-it-backend-hep.herokuapp.com/auth/google", "_self");
+    // window.open("http://localhost:3001/auth/google", "_self");
+    window.open("https://move-it-backend-hep.herokuapp.com/auth/google", "_self");
   };
 
 

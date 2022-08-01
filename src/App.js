@@ -32,8 +32,8 @@ function App() {
 
   useEffect(() => {
     const getUser = () => {
-      fetch("http://localhost:3001/auth/login/success", {
-      // fetch("https://move-it-backend-hep.herokuapp.com/auth/login/success", {
+      // fetch("http://localhost:3001/auth/login/success", {
+      fetch("https://move-it-backend-hep.herokuapp.com/auth/login/success", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -44,7 +44,7 @@ function App() {
       })
         .then((response) => {
           if (response.status === 200) return response.json();
-          throw new Error("authentication has been failed!");
+          throw new Error("authentication has failed!");
         })
         .then((resObject) => {
           setUser(resObject.user);
