@@ -4,9 +4,9 @@ A Physical Therapist's Personal Exercise and Home Exercise Plan Library
 # For Users
 This was developed in mind with helping a PT's ability to share exercise documentation with patients during sessions more efficient. A user can search, select, print, and favorite exercises from this current library. The library was built by myself and a friend that is a PT, as we developed some custom date on several 'top' exercises she would like to share. 
 
-![Searched Items by Name](../move-it-frontend/src/images/searches.png)
+![Searched Items by Name](searches.png)
 
-![Favorited Items](../move-it-frontend/src/images/favorites.png)
+![Favorited Items](favorites.png)
 
 ### Working MVP
 I'm currently continuing my work on the scope and functionality of this project. Right now, a user can login with google login to interact with this site. There is sample size of data, from a custom API I am currently creating with a colleague that is a PT, to document, video and describe exercises, stretches and other HEPs as they are needed during sessions or for users to view/watch for assistance in home exercise programs. Currently, a user can favorite an exercise card after search, and save to their personal library. A user can also remove favorited cards. Ultimately, a user will be able to view and expand exercises saved to the library in greater detail, as well as print an exercise card to pdf upon click for printing and dispersing as desired.
@@ -25,9 +25,9 @@ I'm currently continuing my work on the scope and functionality of this project.
 
 
 ### Backend Project Repo and Deploy Links:
-
+- [Mov-it HEP Frontend Deployment](https://moveit-frontend.herokuapp.com/)
 - [Move-it HEP Backend Deployment](https://move-it-backend-hep.herokuapp.com/)
-- [Move-it HEP Backend Repo](https://github.com/aschweik766/move-it-backend)
+- [Move-it HEP Backend GitHub Repo](https://github.com/aschweik766/move-it-backend)
 
 
 ### Resources, Tools, & Tutorials/Code Alongs:
