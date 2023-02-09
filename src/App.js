@@ -16,6 +16,7 @@ import DisplayLibrary from './Pages/DisplayLibrary';
 // import EditCardPage from './Pages/EditCardPage';
 import EditExCardForm from './Components/library/EditExCardForm';
 // import AddNewCard from './Pages/AddNewCard';
+import jwtDecode from "jwt-decode";
 
 
 // axios.defaults.baseURL = "/api";
@@ -26,41 +27,42 @@ function App() {
   const [exercises, setExercises] = useState([]);
   const [query, setQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState({});
   const [favorites, setFavorites] = useState([]);
 
+  function handleCallBack(response) {
+    console.log("Encoded JWT ID token: " + response.credential)
+    let userObject = jwtDecode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    document.getElementById('loginDiv').hidden = true;
+  };
+
+  function handleSignOut(event) {
+    setUser({});
+    console.log(event);
+    document.getElementById('loginDiv').hidden = false;
+
+  }
+  // const CLIENT_ID = process.env.CLIENT_ID;
 
   useEffect(() => {
-    const getUser = () => {
-      // fetch("http://localhost:3001/auth/login/success", {
-      fetch("https://move-it-backend-hep.herokuapp.com/auth/login/success", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
-          "Access-Control-Allow-Origin":  `https://moveit-frontend.herokuapp.com`,
-        },
-      })
-        .then((response) => {
-          if (response.status === 200) return response.json();
-          throw new Error("authentication has failed!");
-        })
-        .then((resObject) => {
-          setUser(resObject.user);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getUser();
-  }, []);
-
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: "753718326428-8fg7551745gknkvhpdltpuvushbitf61.apps.googleusercontent.com",
+      // client_id: CLIENT_ID,
+      callback: handleCallBack
+    });
+    google.accounts.id.renderButton(
+      document.getElementById('loginDiv'),
+      {theme: "outline", size: "large"}
+    ); 
+  }, []); 
     
+  
       const getEx = () => {
-        // const url= `http://localhost:3001/ex/exercises/`
-        const url= `https://move-it-backend-hep.herokuapp.com/ex/exercises/`
+        const url= `http://localhost:3001/ex/exercises/`
+        // const url= `https://move-it-backend-hep.herokuapp.com/ex/exercises/`
         fetch(url, {
           method: "GET",
           credentials: "include",
@@ -68,19 +70,17 @@ function App() {
             Accept: "application/json",
             "Content-Type": "application/json",
             "Access-Control-Allow-Credentials": true,
-            "Access-Control-Allow-Origin":  `https://moveit-frontend.herokuapp.com`,
           },
         })
         .then(res => res.json())
         .then(res => {
           setExercises(res)
-        //   console.log(res)
+         
         })
         .catch(console.error)
       }
 
       const searchHandler = (query) => {
-
         setQuery(query);
         if (query !== ""){
             const newExerciseList = exercises.filter((exercise) => {
@@ -94,9 +94,7 @@ function App() {
       };
     
       useEffect(() => {
-   
         getEx(exercises);
-       
       }, [exercises])
 
 // saving favorites //
@@ -106,7 +104,6 @@ function App() {
           setFavorites(favCard)
         }
     }, []);
-    
     
     const saveToLocalStorage = (items) => {
       localStorage.setItem('ex-card-favorite', JSON.stringify(items));
@@ -124,22 +121,36 @@ function App() {
       saveToLocalStorage(newFavList);
     }
 
- 
   return (
 
     <div className='container-fluid moveit-app'>
-
       <Navbar user={user}/>
       <div className="search-bar">
         <SearchByNameList 
           exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}
         />
       </div>
+
+      <div className="login">
+          <div id="loginDiv"></div>
+            { Object.keys(user).length !== 0 && 
+              <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
+            }
+            { user && 
+            <div>
+              <img src={user.picture}></img>
+              <h3>{user.name}</h3>
+            </div>
+            }
+        </div>
+  
         <Routes> 
           <Route path="/" element={<Home />} />
           <Route
             path="/login"
-            element={user ? <Navigate to="/" /> : <Login />}
+            element={user ? <Navigate to="/" /> : <Login 
+            user={user}
+            handleSignOut={handleSignOut()}/>}
           />
           <Route
             path="/post/:id"
@@ -148,12 +159,6 @@ function App() {
             <Route path="/home" 
             element={<Home/>}
           />
-            {/* <Route path="/signin" 
-            element={<SignIn/>}
-          />
-            <Route path="/signup" 
-            element={<SignUp/>}
-          /> */}
             <Route path="/ex/exercises/" 
             element={<ExercisesDisplay 
             query={query} exercises={exercises} searchResults={searchResults} term={query} 

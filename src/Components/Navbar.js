@@ -8,8 +8,8 @@ const Navbar = ({ user }) => {
 
   const logout = () => {
 
-    // window.open("http://localhost:3001/auth/logout", "_self");
-    window.open("https://move-it-backend-hep.herokuapp.com/auth/logout", "_self");
+    window.open("http://localhost:3001/auth/logout", "_self");
+    // window.open("https://move-it-backend-hep.herokuapp.com/auth/logout", "_self");
     // setAuthenticated(false)
     // setUser(null)
   };
@@ -26,12 +26,12 @@ const Navbar = ({ user }) => {
           <ul className="list">
             <li className="listItem">
               <img
-                src={user.photos[0].value}
+                src={user.picture}
                 alt=""
                 className="avatar"
               />
             </li>
-            <li className="listItem">{user.displayName}</li>
+            <li className="listItem">{user.name}</li>
             <li className="listItem"onClick={logout}>
               Logout
             </li>
