@@ -1,18 +1,7 @@
 import { Link } from 'react-router-dom'
-import React, { useContext } from 'react'
-import SearchByNameList from '../Pages/SearchByNameList';
+import React from 'react'
 
-const Navbar = ({ user }) => {
-
-  // const { setAuthenticated, setUser } = useContext(UserContext)
-
-  const logout = () => {
-
-    window.open("http://localhost:3001/auth/logout", "_self");
-    // window.open("https://move-it-backend-hep.herokuapp.com/auth/logout", "_self");
-    // setAuthenticated(false)
-    // setUser(null)
-  };
+const Navbar = ({ user, handleSignOut }) => {
 
   return (
     <div className='navbar'>
@@ -27,26 +16,22 @@ const Navbar = ({ user }) => {
             <li className="listItem">
               <img
                 src={user.picture}
-                alt=""
+                alt="avatar"
                 className="avatar"
               />
             </li>
             <li className="listItem">{user.name}</li>
-            <li className="listItem"onClick={logout}>
-              Logout
-            </li>
+            <li className="listItem" onClick={(e) => handleSignOut(e)}>Log Out</li>
           </ul>
           ) : (
             <Link className="link" style={{margin: '10px'}} to="login">
               Login
             </Link>
           )}
-        
-          <div className='align-right'style={{padding:'5px'}}>
+    
+          <div className='align-right'style={{padding:'10px'}}>
           <Link to="/"><button className='cardButton nav-buttons'>Home</button></Link>
-          {/* <Link to="/about"><button className='cardButton nav-buttons'>About</button></Link> */}
           <Link to="/library"><button className='cardButton nav-buttons'>Library</button></Link>
-          {/* <Link to="/account"><button className='cardButton nav-buttons'>Account</button></Link> */}
           <Link to="/ex/exercises/"><button className='cardButton nav-buttons'>Exercises Display</button></Link>
        </div>
        
@@ -56,3 +41,16 @@ const Navbar = ({ user }) => {
 }
 
 export default Navbar
+
+/* <div className="login">
+              <div id="loginDiv"></div>
+                { Object.keys(user).length !== 0 && 
+                  <button onClick={(e) => handleSignOut(e)}>Log out</button>
+                }
+                { user && 
+                <div>
+                  <img src={user.picture}></img>
+                  <h3>{user.name}</h3>
+                </div>
+                }
+            </div> */
