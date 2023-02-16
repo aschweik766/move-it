@@ -21,7 +21,7 @@ function Register() {
     event.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:4000/register",
+        "http://localhost:3001/auth/register",
         {
           ...values,
         },
@@ -68,7 +68,7 @@ function Register() {
         </div>
         <button type="submit">Submit</button>
         <span>
-          Already have an account ?<Link to="/login"> Login</Link>
+          Already have an account ?<Link to="/signIn"> Login</Link>
         </span>
       </form>
       <ToastContainer />

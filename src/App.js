@@ -20,8 +20,9 @@ import Register from './Pages/Register';
 import SignIn from './Pages/SignIn';
 import Cards from './Pages/Cards';
 import "react-toastify/dist/ReactToastify.css";
-
-
+import LoginNew from "./Components/LoginNew.js";
+import Signup from "./Components/SignUp.js";
+import Nav from "./Components/Nav";
 
 // axios.defaults.baseURL = "/api";
 
@@ -34,20 +35,20 @@ function App() {
   const [user, setUser] = useState({});
   const [favorites, setFavorites] = useState([]);
 
-  function handleCallBack(response) {
-    console.log("Encoded JWT ID token: " + response.credential)
-    let userObject = jwtDecode(response.credential);
-    console.log(userObject);
-    setUser(userObject);
-    document.getElementById('loginDiv').hidden = true;
-  };
+  // function handleCallBack(response) {
+  //   console.log("Encoded JWT ID token: " + response.credential)
+  //   let userObject = jwtDecode(response.credential);
+  //   console.log(userObject);
+  //   setUser(userObject);
+  //   document.getElementById('loginDiv').hidden = true;
+  // };
 
-  function handleSignOut(event) {
-    setUser({});
-    console.log(event);
-    document.getElementById('loginDiv').hidden = false;
+  // function handleSignOut(event) {
+  //   setUser({});
+  //   console.log(event);
+  //   document.getElementById('loginDiv').hidden = false;
 
-  }
+  // }
   // const CLIENT_ID = process.env.CLIENT_ID;
 
     const getEx = () => {
@@ -86,15 +87,15 @@ function App() {
     useEffect(() => {
       getEx(exercises);
               /* global google */
-      google.accounts.id.initialize({
-        client_id: "753718326428-8fg7551745gknkvhpdltpuvushbitf61.apps.googleusercontent.com",
-        // client_id: CLIENT_ID,
-        callback: handleCallBack
-      });
-      google.accounts.id.renderButton(
-        document.getElementById('loginDiv'),
-        {theme: "outline", size: "large"}
-      ); 
+      // google.accounts.id.initialize({
+      //   client_id: "753718326428-8fg7551745gknkvhpdltpuvushbitf61.apps.googleusercontent.com",
+      //   // client_id: CLIENT_ID,
+      //   callback: handleCallBack
+      // });
+      // google.accounts.id.renderButton(
+      //   document.getElementById('loginDiv'),
+      //   {theme: "outline", size: "large"}
+      // ); 
     }, [exercises])
 
 // saving favorites //
@@ -123,71 +124,81 @@ function App() {
 
   return (
 
-    <div className='container-fluid moveit-app'>
-      <Navbar user={user} handleSignOut={handleSignOut}/>
+    <div className="container-fluid nav">
+      <Nav/>
+          <Routes>
+            <Route path="/account/login" element={<LoginNew/>}/>
+            <Route path="/account/signup" element={<Signup/>}/>
+          </Routes>
+    </div>
+    // <div className='container-fluid moveit-app'>
+    //   <Navbar user={user} handleSignOut={handleSignOut}/>
 
-        <div className="login">
-          <div id="loginDiv"></div>
-            { Object.keys(user).length !== 0 && 
-              <button onClick={(e) => handleSignOut(e)}>Log out</button>
-            }
-            { user && 
-            <div>
-              <img src={user.picture}></img>
-              <h3>{user.name}</h3>
-            </div>
-            }
-        </div> 
-      <div className="search-bar">
-        <SearchByNameList 
-          exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}
-        />
-      </div>
+    //     <div className="login">
+    //       <div id="loginDiv"></div>
+    //         { Object.keys(user).length !== 0 && 
+    //           <button onClick={(e) => handleSignOut(e)}>Log out</button>
+    //         }
+    //         { user && 
+    //         <div>
+    //           <img src={user.picture}></img>
+    //           <h3>{user.name}</h3>
+    //         </div>
+    //         }
+    //     </div> 
+    //   <div className="search-bar">
+    //     <SearchByNameList 
+    //       exercises={query.length < 1 ? exercises : searchResults} term={query} searchKeyword={searchHandler}
+    //     />
+    //   </div>
 
      
-        <Routes> 
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={user ? <Navigate to="/" /> : <Login 
-            user={user}
-            handleSignOut={handleSignOut}/>}
-          />
+    //     <Routes> 
 
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/login" element={<Login />} />
-          {/* <Route exact path="/" element={<Cards />} /> */}
-            <Route path="/ex/exercises/" 
-            element={<ExercisesDisplay 
-            query={query} exercises={exercises} searchResults={searchResults} term={query} 
-            searchKeyword={searchHandler} handleFavClick={addFavExCard} 
-            favComponent={Favbtn} favorites={favorites}/>}
-          /> 
-            <Route path="/exercises/:id" 
-            element={<SearchResults 
-            searchResults={searchResults} favorites={favorites} handleFavClick={addFavExCard} 
-            favComponent={Favbtn}  />}
-          /> 
-           <Route path="/library" 
-            element={<DisplayLibrary 
-            searchResults={favorites} handleFavClick={addFavExCard} 
-            handleUnFavClick={removeExCardFav}
-            favComponent={Favbtn} 
-            removeFavComponent={RemoveFavorites} />}
-          /> 
-           <Route path="/library/:id" 
-            element={<SearchResults 
-            searchResults={favorites} handleUnFavClick={removeExCardFav} 
-            favComponent={Favbtn}  />}
-          /> 
-           <Route path="/exercise/editcard" 
-            element={<EditExCardForm 
-            searchResults={favorites} handleUnFavClick={removeExCardFav} 
-            favComponent={Favbtn}  />}
-          /> 
-        </Routes>
+
+
+    //       <Route path="/" element={<Home />} />
+    //       <Route
+    //         path="/login"
+    //         element={user ? <Navigate to="/" /> : <Login 
+    //         user={user}
+    //         handleSignOut={handleSignOut}/>}
+    //       />
+
+    //       <Route exact path="/register" element={<Register />} />
+    //       <Route exact path="/login" element={<Login />} />
+    //       {/* <Route exact path="/" element={<Cards />} /> */}
+    //         <Route path="/ex/exercises/" 
+    //         element={<ExercisesDisplay 
+    //         query={query} exercises={exercises} searchResults={searchResults} term={query} 
+    //         searchKeyword={searchHandler} handleFavClick={addFavExCard} 
+    //         favComponent={Favbtn} favorites={favorites}/>}
+    //       /> 
+    //         <Route path="/exercises/:id" 
+    //         element={<SearchResults 
+    //         searchResults={searchResults} favorites={favorites} handleFavClick={addFavExCard} 
+    //         favComponent={Favbtn}  />}
+    //       /> 
+    //        <Route path="/library" 
+    //         element={<DisplayLibrary 
+    //         searchResults={favorites} handleFavClick={addFavExCard} 
+    //         handleUnFavClick={removeExCardFav}
+    //         favComponent={Favbtn} 
+    //         removeFavComponent={RemoveFavorites} />}
+    //       /> 
+    //        <Route path="/library/:id" 
+    //         element={<SearchResults 
+    //         searchResults={favorites} handleUnFavClick={removeExCardFav} 
+    //         favComponent={Favbtn}  />}
+    //       /> 
+    //        <Route path="/exercise/editcard" 
+    //         element={<EditExCardForm 
+    //         searchResults={favorites} handleUnFavClick={removeExCardFav} 
+    //         favComponent={Favbtn}  />}
+    //       /> 
+    //     </Routes>
             
-    </div>
+    // </div>
   );
 }
 export default App;
